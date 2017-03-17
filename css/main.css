@@ -869,7 +869,7 @@ pre .javascript .function {
   bottom: 40px;
 }
 .header {
-  background: url("../image/timg.jpg");
+  background: #fff;
 }
 .header-inner {
   position: relative;
@@ -1549,7 +1549,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffb8bd;
+  background: #ff7358;
 }
 .links-of-blogroll {
   font-size: 13px;
