@@ -1549,7 +1549,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d4afdf;
+  background: #114778;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2164,7 +2164,7 @@ body {
   overflow: hidden;
   padding: 0;
   width: 240px;
-  background: #fff;
+  background: url("http://omypg8228.bkt.clouddn.com/1399647f0829832f584d87279165a4e4.jpg");
 }
 @media (min-width: 1600px) {
   .container .header-inner {
@@ -2219,7 +2219,7 @@ body {
   box-sizing: border-box;
   padding: 40px;
   width: 700px;
-  background: #fff;
+  background: url("http://omypg8228.bkt.clouddn.com/1399647f0829832f584d87279165a4e4.jpg");
   min-height: 700px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -2296,7 +2296,7 @@ body {
 .site-meta {
   padding: 20px 0;
   color: #fff;
-  background: #222;
+  background: url("http://omypg8228.bkt.clouddn.com/58c503e78b915a6912ffeaa2675a7e05.jpg");
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .site-meta {
@@ -2395,7 +2395,7 @@ body {
   box-sizing: border-box;
   width: 240px;
   color: #555;
-  background: #fff;
+  background: url("http://omypg8228.bkt.clouddn.com/1399647f0829832f584d87279165a4e4.jpg");
 }
 .sidebar-inner.affix {
   position: fixed;
@@ -2519,4 +2519,8 @@ body {
   .post-body {
     text-align: justify;
   }
+}
+body {
+  background: url("http://omypg8228.bkt.clouddn.com/timg.jpg");
+  background-attachment: fixed;
 }
