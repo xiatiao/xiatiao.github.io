@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="love柚子" />
+
+
+
+<meta name="description" content="生成一颗ace treeace admin1.4.0以后好像已经很长时间没有更新，莫非作者在憋大招？或者烂尾了？这让我想起来前两天看帖子，多说好像也不准备维护了。不过没事，这种依赖于GitHub的静态网站屏蔽百度爬虫本身就没有什么访问量，都是自己写给自己看的，一是为了记录心情，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AceAdmin fuelux tree和grid的交互(2)">
+<meta property="og:url" content="http://www.xiatiaohcx.com/2017/04/21/AceAdmin-fuelux-tree和grid的交互-2/index.html">
+<meta property="og:site_name" content="芥末大豆屋">
+<meta property="og:description" content="生成一颗ace treeace admin1.4.0以后好像已经很长时间没有更新，莫非作者在憋大招？或者烂尾了？这让我想起来前两天看帖子，多说好像也不准备维护了。不过没事，这种依赖于GitHub的静态网站屏蔽百度爬虫本身就没有什么访问量，都是自己写给自己看的，一是为了记录心情，">
+<meta property="og:updated_time" content="2017-04-23T14:56:42.526Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AceAdmin fuelux tree和grid的交互(2)">
+<meta name="twitter:description" content="生成一颗ace treeace admin1.4.0以后好像已经很长时间没有更新，莫非作者在憋大招？或者烂尾了？这让我想起来前两天看帖子，多说好像也不准备维护了。不过没事，这种依赖于GitHub的静态网站屏蔽百度爬虫本身就没有什么访问量，都是自己写给自己看的，一是为了记录心情，">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="芥末大豆屋" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>AceAdmin fuelux tree和grid的交互(2) | 芥末大豆屋</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: false,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?f2aac05c31cd9f7b324470b7666081c2";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/AcFun.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">love柚子</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">love柚子妈</p>
+        
+
+        
+
+
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">love柚子</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/AcFun.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">love柚子</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">love柚子妈</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-AceAdmin-fuelux-tree和grid的交互-2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/21/AceAdmin-fuelux-tree和grid的交互-2/" class="article-date">
+      <time datetime="2017-04-21T08:27:58.000Z" itemprop="datePublished">2017-04-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AceAdmin fuelux tree和grid的交互(2)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/J2EE/">J2EE</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ace-Admin/">Ace Admin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fuelux-tree/">fuelux tree</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="生成一颗ace-tree"><a href="#生成一颗ace-tree" class="headerlink" title="生成一颗ace tree"></a>生成一颗ace tree</h3><p>ace admin1.4.0以后好像已经很长时间没有更新，莫非作者在憋大招？或者烂尾了？这让我想起来前两天看帖子，多说好像也不准备维护了。不过没事，这种依赖于GitHub的静态网站屏蔽百度爬虫本身就没有什么访问量，都是自己写给自己看的，一是为了记录心情，<excerpt in="" index="" |="" 首页摘要=""><a id="more"></a><the rest="" of="" contents="" |="" 余下全文="">也是记录编码中碰到的各种问题。还有就是假如将来会换工作。这个博客也能拿出来作为谈判的筹码，言归正传：</the></excerpt></p>
+<h3 id="ace-tree的json形态"><a href="#ace-tree的json形态" class="headerlink" title="ace tree的json形态"></a>ace tree的json形态</h3><p>ace admin1.4.0自带例子中tree的json形态全部都是用JsonObject的形式组成的。这样非常不符合树的json形态。不过没关系，其实完全可以把JsonObject的形式改为JsonArray，一样能出来树的效果。以下是ace tree的json格式</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">    &#123;</div><div class="line">        <span class="attr">"text"</span>: <span class="string">"全球互联网智能研究院"</span>,</div><div class="line">        <span class="attr">"additionalParameters"</span>: &#123;</div><div class="line">            <span class="attr">"id"</span>: <span class="string">"c12906d6bfe14982b195efd89d361261"</span>,</div><div class="line">            <span class="attr">"children"</span>: [</div><div class="line">                &#123;</div><div class="line">                    <span class="attr">"text"</span>: <span class="string">"信通所"</span>,</div><div class="line">                    <span class="attr">"additionalParameters"</span>: &#123;</div><div class="line">                        <span class="attr">"id"</span>: <span class="string">"8bbffae4db1449e2a8cdf446c86fccbc"</span>,</div><div class="line">                        <span class="attr">"children"</span>: []</div><div class="line">                    &#125;,</div><div class="line">                    <span class="attr">"type"</span>: <span class="string">"folder"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="attr">"text"</span>: <span class="string">"&lt;i class=\"ace-icon fa fa-book blue\"&gt;&lt;/i&gt;计算所"</span>,</div><div class="line">                    <span class="attr">"additionalParameters"</span>: &#123;</div><div class="line">                        <span class="attr">"id"</span>: <span class="string">"d25e52f265f14b369c560c73cb070355"</span>,</div><div class="line">                        <span class="attr">"children"</span>: []</div><div class="line">                    &#125;,</div><div class="line">                    <span class="attr">"type"</span>: <span class="string">"item"</span></div><div class="line">                &#125;</div><div class="line">            ]</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">"type"</span>: <span class="string">"folder"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        <span class="attr">"text"</span>: <span class="string">"国网电力科学研究院"</span>,</div><div class="line">        <span class="attr">"additionalParameters"</span>: &#123;</div><div class="line">            <span class="attr">"id"</span>: <span class="string">"b00e288195024b98a25524ec03761c38"</span>,</div><div class="line">            <span class="attr">"children"</span>: []</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">"type"</span>: <span class="string">"folder"</span></div><div class="line">    &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+<p><iframe height="600" width="1000" src="http://omypg8228.bkt.clouddn.com/image/ace_%E9%83%A8%E9%97%A8%E6%BC%94%E7%A4%BA/%E5%8D%95%E9%83%A8%E9%97%A8%E6%A0%91%E9%83%A8%E9%97%A8%E6%A0%91%E5%8D%95.gif"></iframe><br>这种格式看起来就正常多了，符合树的结构。一般情况下，树都是动态加载的，也就是说一层一层的加载。这样加载速度会快点。也有特殊需求是需要全部加载。需要说明一点的是这颗树种additionalParameters，children这种结构是ace tree特有的，不能变,而且节点key值也不能变。</p>
+<h3 id="服务器构造ace-tree数据"><a href="#服务器构造ace-tree数据" class="headerlink" title="服务器构造ace tree数据"></a>服务器构造ace tree数据</h3><p>构造这样的数据需要两个类完成，这两个类也是从网上找的，直接能用。代码如下</p>
+<p><strong> AdditionalParameters.java </strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdditionalParameters</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String id;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> List&lt;Item&gt; children;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Item&gt; <span class="title">getChildren</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> children;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setChildren</span><span class="params">(List&lt;Item&gt; children)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.children = children;</div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong> Item.java </strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Item</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span></div><div class="line">&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">8441703538424476923L</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String text;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String type;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> AdditionalParameters additionalParameters;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getText</span><span class="params">( )</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> text;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setText</span><span class="params">( String text )</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>.text = text;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getType</span><span class="params">( )</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> type;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setType</span><span class="params">( String type )</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>.type = type;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> AdditionalParameters <span class="title">getAdditionalParameters</span><span class="params">( )</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> additionalParameters;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAdditionalParameters</span><span class="params">( AdditionalParameters additionalParameters )</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>.additionalParameters = additionalParameters;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="服务器端生成树Json格式代码"><a href="#服务器端生成树Json格式代码" class="headerlink" title="服务器端生成树Json格式代码"></a>服务器端生成树Json格式代码</h3><blockquote>
+<ul>
+<li>1.代码是基于FH Admin改的，凡是FH写好的东西，能不动的都没动</li>
+<li>2.部门组织结构树中的数据来源直接使用FH Admin的数据字典表，</li>
+<li>3.ace tree可以全部加载，也可以逐层加载。这里使用逐层加载。每次只根据父节点ID查询下一层即可。</li>
+<li>4.根据当前节点的子节点个数来判断当前节点为folder节点还是item节点</li>
+<li>5.PageData集成HashMap，以key,value形式存储持久化数据。(FH Admin是这样写的，我觉得这样写挺好，记得以前好像都是javabean，现在有可能是升级了)</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">list123</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span><span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    </div><div class="line">    String PARENT_ID = request.getParameter(<span class="string">"PARENT_ID"</span>);</div><div class="line">    </div><div class="line">    List &lt; PageData &gt; varList = dictionariesService.findList(PARENT_ID);</div><div class="line">    </div><div class="line">    List &lt; Item &gt; voItemList = <span class="keyword">new</span> ArrayList &lt; Item &gt; ();</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> != varList &amp;&amp; varList.size() != <span class="number">0</span>) &#123;</div><div class="line">		</div><div class="line">        <span class="keyword">for</span> (PageData tree : varList) &#123;</div><div class="line">			</div><div class="line">            Item item = <span class="keyword">new</span> Item();</div><div class="line">			</div><div class="line">            String id = tree.getString(<span class="string">"ZD_ID"</span>);</div><div class="line">			</div><div class="line">            PageData pd1 = <span class="keyword">new</span> PageData();</div><div class="line">			</div><div class="line">            pd1.put(<span class="string">"PARENT_ID"</span>, id);</div><div class="line">			</div><div class="line">            List &lt; PageData &gt; varList1 = dictionariesService.findList(pd1);</div><div class="line">			</div><div class="line">            <span class="keyword">int</span> child_count = varList1.size();</div><div class="line">			</div><div class="line">            <span class="keyword">if</span> (child_count &gt; <span class="number">0</span>) &#123;</div><div class="line">				</div><div class="line">                item.setText(tree.getString(<span class="string">"NAME"</span>));</div><div class="line">				</div><div class="line">                item.setType(<span class="string">"folder"</span>); <span class="comment">// 有子节点</span></div><div class="line">				</div><div class="line">                AdditionalParameters adp = <span class="keyword">new</span> AdditionalParameters();</div><div class="line">				</div><div class="line">                adp.setId(tree.getString(<span class="string">"ZD_ID"</span>));</div><div class="line">				</div><div class="line">                item.setAdditionalParameters(adp);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">				</div><div class="line">                item.setText(<span class="string">"&lt;i class=\"ace-icon fa fa-book blue\"&gt;&lt;/i&gt;"</span> + </div><div class="line">                tree.getString(<span class="string">"NAME"</span>));</div><div class="line">				</div><div class="line">                AdditionalParameters adp = <span class="keyword">new</span> AdditionalParameters();</div><div class="line">				</div><div class="line">                adp.setId(tree.getString(<span class="string">"ZD_ID"</span>));</div><div class="line">				</div><div class="line">                item.setAdditionalParameters(adp);</div><div class="line">				</div><div class="line">                item.setType(<span class="string">"item"</span>); <span class="comment">// 无子节点</span></div><div class="line">				</div><div class="line">            &#125;</div><div class="line">			</div><div class="line">            voItemList.add(item);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    JSONArray json = JSONArray.fromObject(voItemList); </div><div class="line">	</div><div class="line">    String str = json.toString();</div><div class="line">	</div><div class="line">    System.out.println(<span class="string">"aaaaaaaaaaaaaaaaaaaaaaa"</span> + str);</div><div class="line">	</div><div class="line">    response.setCharacterEncoding(<span class="string">"UTF-8"</span>);</div><div class="line">	</div><div class="line">    response.getWriter().print(str);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong> PageData.java </strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageData</span> <span class="keyword">extends</span> <span class="title">HashMap</span> <span class="keyword">implements</span> <span class="title">Map</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</div><div class="line">    </div><div class="line">    Map map = <span class="keyword">null</span>;</div><div class="line">    </div><div class="line">    HttpServletRequest request;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PageData</span><span class="params">(HttpServletRequest request)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.request = request;</div><div class="line">        Map properties = request.getParameterMap();</div><div class="line">        Map returnMap = <span class="keyword">new</span> HashMap(); </div><div class="line">        Iterator entries = properties.entrySet().iterator(); </div><div class="line">        Map.Entry entry; </div><div class="line">        String name = <span class="string">""</span>;  </div><div class="line">        String value = <span class="string">""</span>;  </div><div class="line">        <span class="keyword">while</span> (entries.hasNext()) &#123;</div><div class="line">            entry = (Map.Entry) entries.next(); </div><div class="line">            name = (String) entry.getKey(); </div><div class="line">            Object valueObj = entry.getValue(); </div><div class="line">            <span class="keyword">if</span>(<span class="keyword">null</span> == valueObj)&#123; </div><div class="line">                value = <span class="string">""</span>; </div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(valueObj <span class="keyword">instanceof</span> String[])&#123; </div><div class="line">                String[] values = (String[])valueObj;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;values.length;i++)&#123; </div><div class="line">                    value = values[i] + <span class="string">","</span>;</div><div class="line">                &#125;</div><div class="line">                value = value.substring(<span class="number">0</span>, value.length()-<span class="number">1</span>); </div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                value = valueObj.toString(); </div><div class="line">            &#125;</div><div class="line">            returnMap.put(name, value); </div><div class="line">        &#125;</div><div class="line">        map = returnMap;</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PageData</span><span class="params">()</span> </span>&#123;</div><div class="line">        map = <span class="keyword">new</span> HashMap();</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">        Object obj = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">if</span>(map.get(key) <span class="keyword">instanceof</span> Object[]) &#123;</div><div class="line">            Object[] arr = (Object[])map.get(key);</div><div class="line">            obj = request == <span class="keyword">null</span> ? arr:(request.getParameter((String)key) == <span class="keyword">null</span> ? arr:arr[<span class="number">0</span>]);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            obj = map.get(key);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> obj;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getString</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> (String)get(key);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">put</span><span class="params">(Object key, Object value)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> map.put(key, value);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">remove</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> map.remove(key);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</div><div class="line">        map.clear();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">containsKey</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">        <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        <span class="keyword">return</span> map.containsKey(key);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">containsValue</span><span class="params">(Object value)</span> </span>&#123;</div><div class="line">        <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        <span class="keyword">return</span> map.containsValue(value);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Set <span class="title">entrySet</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        <span class="keyword">return</span> map.entrySet();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        <span class="keyword">return</span> map.isEmpty();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> Set <span class="title">keySet</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        <span class="keyword">return</span> map.keySet();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">putAll</span><span class="params">(Map t)</span> </span>&#123;</div><div class="line">        <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        map.putAll(t);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        <span class="keyword">return</span> map.size();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> Collection <span class="title">values</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        <span class="keyword">return</span> map.values();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="客户端javaScript生成树代码"><a href="#客户端javaScript生成树代码" class="headerlink" title="客户端javaScript生成树代码"></a>客户端javaScript生成树代码</h3><p><strong> jsp </strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-3"</span> <span class="attr">id</span>=<span class="string">"iframeTree"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"widget-box widget-color-gray"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"widget-body"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"widget-main padding-8"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"treeview"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong> JavaScript </strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> remoteDateSource = <span class="function"><span class="keyword">function</span> (<span class="params">options, callback</span>) </span>&#123;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (!(<span class="string">'text'</span> <span class="keyword">in</span> options || <span class="string">'type'</span> <span class="keyword">in</span> options)) &#123;</div><div class="line">            PARENT_ID = <span class="string">"$&#123;pd.PARENT_ID&#125;"</span>;</div><div class="line">            </div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">'type'</span> <span class="keyword">in</span> options &amp;&amp; options[<span class="string">'type'</span>] == <span class="string">'folder'</span>) &#123; </div><div class="line">            <span class="keyword">if</span> (<span class="string">'additionalParameters'</span> <span class="keyword">in</span> options &amp;&amp; <span class="string">'children'</span> <span class="keyword">in</span> options.additionalParameters)&#123;</div><div class="line">                PARENT_ID = options.additionalParameters[<span class="string">'id'</span>]</div><div class="line">            &#125;</div><div class="line">        		</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">var</span> remoteUrl = <span class="string">'&lt;%=basePath%&gt;dictionaries/list123.do?PARENT_ID='</span> + PARENT_ID;</div><div class="line">        <span class="keyword">if</span> (PARENT_ID !== <span class="literal">null</span>) &#123;</div><div class="line">            $.ajax(&#123;</div><div class="line">                <span class="attr">url</span> : remoteUrl,</div><div class="line">                <span class="attr">dataType</span> : <span class="string">'json'</span>,</div><div class="line">                <span class="attr">success</span> : <span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</div><div class="line">                    callback(&#123;</div><div class="line">                        <span class="attr">data</span> : response</div><div class="line">                    &#125;)</div><div class="line">                &#125;,</div><div class="line">                <span class="attr">error</span> : <span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</div><div class="line">                    <span class="comment">//alert(2);</span></div><div class="line">                    <span class="comment">//console.log(response);</span></div><div class="line">                &#125;</div><div class="line">            &#125;)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">    $(<span class="string">'#treeview'</span>).aceTree(&#123;</div><div class="line">        <span class="attr">dataSource</span> : remoteDateSource,</div><div class="line">        <span class="attr">multiSelect</span> : <span class="literal">false</span>,</div><div class="line">        <span class="attr">loadingHTML</span> : <span class="string">'&lt;div class="tree-loading"&gt;&lt;i class="ace-icon fa fa-refresh fa-spin blue"&gt;&lt;/i&gt;&lt;/div&gt;'</span>,</div><div class="line">        <span class="string">'selectable'</span> : <span class="literal">true</span>,</div><div class="line">        <span class="string">'open-icon'</span> : <span class="string">'ace-icon fa fa-folder-open orange'</span>,</div><div class="line">        <span class="string">'close-icon'</span> : <span class="string">'ace-icon fa fa-folder orange'</span>,</div><div class="line">        <span class="string">'selected-icon'</span> : <span class="literal">null</span>,</div><div class="line">        <span class="string">'unselected-icon'</span> : <span class="literal">null</span>,</div><div class="line">        <span class="string">'cacheItems'</span>: <span class="literal">false</span>,</div><div class="line">        <span class="string">'folder-open-icon'</span> : <span class="string">'ace-icon tree-plus'</span>,</div><div class="line">        <span class="string">'folder-close-icon'</span> : <span class="string">'ace-icon tree-minus'</span>,</div><div class="line">        <span class="attr">folderSelect</span> : <span class="literal">true</span></div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>到此一棵ace tree就形成了</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/04/21/AceAdmin-fuelux-tree和grid的交互-2/">AceAdmin fuelux tree和grid的交互(2)</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">love柚子</a></p>
+        <p><span>发布时间:</span>2017-04-21, 16:27:58</p>
+        <p><span>最后更新:</span>2017-04-23, 22:56:42</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/04/21/AceAdmin-fuelux-tree和grid的交互-2/" title="AceAdmin fuelux tree和grid的交互(2)">http://www.xiatiaohcx.com/2017/04/21/AceAdmin-fuelux-tree和grid的交互-2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xiatiaohcx.com/2017/04/21/AceAdmin-fuelux-tree和grid的交互-2/　　作者: love柚子" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/04/21/AceAdmin-fuelux-tree和grid的交互/">
+                    AceAdmin fuelux tree和grid的交互(1)
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"AceAdmin fuelux tree和grid的交互(2)　| 芥末大豆屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2131563';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/04/21/AceAdmin-fuelux-tree和grid的交互/" title="下一篇: AceAdmin fuelux tree和grid的交互(1)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/AceAdmin-fuelux-tree和grid的交互-2/">AceAdmin fuelux tree和grid的交互(2)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/AceAdmin-fuelux-tree和grid的交互/">AceAdmin fuelux tree和grid的交互(1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/项目框架介绍/">J2EE项目框架介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/21/前言/">前言</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/测试Markdown语法格式/">Markdown语法测试，有些浏览器不识别</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017 love柚子
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 1;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
